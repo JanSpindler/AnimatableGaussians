@@ -3,7 +3,7 @@ train:
   dataset: MvRgbDatasetTHuman4
   data:
     subject_name: subject00
-    data_dir: Z:/Data/MultiviewRGB/THuman4/subject00
+    data_dir: ./thuman/subject00
     frame_range: &id001
     - 0
     - 2000
@@ -20,7 +20,11 @@ train:
   eval_training_ids: [310, 19]
   eval_testing_ids: [354, 1]
   eval_img_factor: 1.0
-  lr_init: 0.0005
+  # lr_init: 0.0005
+  lr:
+    network:
+      type: Constant
+      value: 0.0005
   loss_weight:
     l1: 1.0
     lpips: 0.1
@@ -32,11 +36,11 @@ train:
 test:
   dataset: MvRgbDatasetTHuman4
   data:
-    data_dir: Z:/Data/MultiviewRGB/THuman4/subject00
+    data_dir: ./thuman/subject00
     frame_range: *id001
     subject_name: subject00
   pose_data:
-    data_path: Z:/Data/Pose/thuman4/pose_00.npz
+    data_path: ./thuman/subject00/pose_00.npz
     frame_range: [2000, 2500]
     hand_pose_type: fist
   view_setting: camera
@@ -53,3 +57,10 @@ test:
 model:
   with_viewdirs: true
   random_style: false
+# model parameters
+  multires: 6
+  multires_viewdir: 3
+  use_viewdir: false
+  with_hand: true
+  volume_type: diff
+  use_root_finding: true

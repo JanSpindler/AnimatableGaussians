@@ -112,7 +112,7 @@ def calc_cano_weight_volume(data_dir, gender = 'neutral'):
     )
 
     compute_lbs_grad(cano_smpl_trimesh, smpl_model.lbs_weights.cpu().numpy())
-    solve(smpl_model.lbs_weights.shape[-1], ".\\bins\\PointInterpolant.exe")
+    solve(smpl_model.lbs_weights.shape[-1], "./bins/PointInterpolant")
 
     ### NOTE concatenate all grids
     fn_list = sorted(list(glob.glob(os.path.join(tmp_dir, 'grid_*.grd'))))
@@ -152,7 +152,7 @@ def calc_cano_weight_volume(data_dir, gender = 'neutral'):
     res = diff_weights.shape[:3]
     pts = get_grid_points(volume_bounds, res)
     pts = pts.reshape(-1, 3)
-    dists, face_id, closest_pts = igl.signed_distance(pts, cano_smpl_trimesh.vertices, smpl_model.faces.astype(np.int32))
+    dists, face_id, closest_pts, _ = igl.signed_distance(pts, cano_smpl_trimesh.vertices, smpl_model.faces.astype(np.int32))
     triangles = cano_smpl_trimesh.vertices[smpl_model.faces[face_id]]
     weights = smpl_model.lbs_weights.numpy()[smpl_model.faces[face_id]]
     barycentric_weight = trimesh.triangles.points_to_barycentric(triangles, closest_pts)
