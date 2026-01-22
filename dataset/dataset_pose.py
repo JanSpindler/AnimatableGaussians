@@ -49,7 +49,7 @@ class PoseDataset(Dataset):
             self.dataset_name = 'aist++'
             self.seq_name = data_name
         elif ext == '.npz':
-            potential_datasets = ['thuman4', 'actorshq', 'avatarrex', 'AMASS']
+            potential_datasets = ['thuman4', 'actorshq', 'avatarrex', 'AMASS', "thuman"]
             for i, potential_dataset in enumerate(potential_datasets):
                 start_pos = data_path.find(potential_dataset)
                 if start_pos == -1:
@@ -66,13 +66,19 @@ class PoseDataset(Dataset):
                 smpl_data = dict(smpl_data)
             else:  # AMASS dataset
                 pose_file = np.load(data_path)
+                print(list(pose_file.keys()))
                 smpl_data = {
                     'betas': np.zeros((1, 10), np.float32),
-                    'global_orient': pose_file['poses'][:, :3],
-                    'transl': pose_file['trans'],
-                    'body_pose': pose_file['poses'][:, 3: 22 * 3],
-                    'left_hand_pose': pose_file['poses'][:, 22 * 3: 37 * 3],
-                    'right_hand_pose': pose_file['poses'][:, 37 * 3:]
+                    # 'global_orient': pose_file['poses'][:, :3],
+                    # 'transl': pose_file['trans'],
+                    # 'body_pose': pose_file['poses'][:, 3: 22 * 3],
+                    # 'left_hand_pose': pose_file['poses'][:, 22 * 3: 37 * 3],
+                    # 'right_hand_pose': pose_file['poses'][:, 37 * 3:]
+                    'global_orient': pose_file['global_orient'],
+                    'transl': pose_file['transl'],
+                    'body_pose': pose_file['body_pose'],
+                    'left_hand_pose': pose_file['left_hand_pose'],
+                    'right_hand_pose': pose_file['right_hand_pose']
                 }
 
                 smpl_data['body_pose'][:, 13 * 3 + 2] -= 0.3
@@ -549,7 +555,7 @@ class PoseDataset(Dataset):
 
     @staticmethod
     def gen_uv(img_w, img_h):
-        x, y = np.meshgrid(np.linspace(0, img_w - 1, img_w, dtype = np.int),
-                           np.linspace(0, img_h - 1, img_h, dtype = np.int))
+        x, y = np.meshgrid(np.linspace(0, img_w - 1, img_w, dtype = np.int32),
+                           np.linspace(0, img_h - 1, img_h, dtype = np.int32))
         uv = np.stack([x, y], axis = -1)
         return uv
