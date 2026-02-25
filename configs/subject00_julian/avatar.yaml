@@ -5,10 +5,10 @@ train:
     subject_name: subject00_julian
     data_dir: ./thuman/subject00
     frame_range: &id001
-    - 501
-    - 750
+    - 0
+    - 2000
     - 1
-    used_cam_ids: [0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+    used_cam_ids: [0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22] #, 23]
     load_smpl_pos_map: true
   pretrained_dir: null
   net_ckpt_dir: ./results/subject00_julian/avatar
@@ -41,7 +41,7 @@ test:
     subject_name: subject00_julian
   pose_data:
     data_path: ./thuman/subject00/pose_00.npz
-    frame_range: [500, 750]
+    frame_range: [2000, 2500]
     hand_pose_type: fist
   view_setting: camera
   render_view_idx: 18

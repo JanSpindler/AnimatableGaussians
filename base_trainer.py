@@ -37,7 +37,7 @@ class BaseTrainer:
 
     @staticmethod
     def load_pretrained(path, dict_):
-        data = torch.load(path)
+        data = torch.load(path, weights_only=False)
         for k in dict_:
             if k in data:
                 print('# Loading %s...' % k)
