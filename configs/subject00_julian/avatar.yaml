@@ -44,7 +44,7 @@ test:
     frame_range: [2000, 2500]
     hand_pose_type: fist
   view_setting: camera
-  render_view_idx: 18
+  render_view_idx: 23
   global_orient: true
   img_scale: 1.0
   save_mesh: false
@@ -53,7 +53,7 @@ test:
   save_ply: false
   n_pca: 20
   sigma_pca: 2.0
-  prev_ckpt: ./results/subject00_julian/avatar/batch_400000
+  prev_ckpt: ./results/subject00_julian/avatar/batch_500000
 model:
   with_viewdirs: true
   random_style: false
