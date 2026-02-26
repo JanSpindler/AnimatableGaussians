@@ -39,7 +39,7 @@ class AvatarTrainer:
         self.opt = opt
         self.patch_size = 512
         self.iter_idx = 0
-        self.iter_num = 800000
+        self.iter_num = 500000
         self.lr_init = float(self.opt['train'].get('lr_init', 5e-4))
 
         avatar_module = self.opt['model'].get('module', 'network.avatar')
