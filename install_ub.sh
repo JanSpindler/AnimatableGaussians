@@ -5,3 +5,13 @@ pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu12
 pip install glfw libigl joblib numpy opencv-python plyfile PyOpenGL pyrender pyyaml scikit-image scikit-learn screeninfo setuptools tqdm trimesh
 export TORCH_CUDA_ARCH_LIST="12.0"
 pip install --no-build-isolation "git+https://github.com/facebookresearch/pytorch3d.git"
+
+# install diff-gaussian-rasterization-depth-alpha
+cd gaussians/diff_gaussian_rasterization_depth_alpha
+python setup.py install
+cd ../..
+
+# install styleunet
+cd network/styleunet
+python setup.py install
+cd ../..
