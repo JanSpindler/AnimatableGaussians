@@ -170,3 +170,4 @@ cython_debug/
 *.exe
 bins/
 thuman/
+thuman.tar.gz
