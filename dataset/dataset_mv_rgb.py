@@ -373,8 +373,29 @@ class MvRgbDatasetTHuman4(MvRgbDatasetBase):
                 self.data_list.remove(missing_data_idx)
 
     def load_color_mask_images(self, pose_idx, view_idx):
-        color_img = cv.imread(self.data_dir + '/images/cam%02d/%08d.jpg' % (view_idx, pose_idx), cv.IMREAD_UNCHANGED)
-        mask_img = cv.imread(self.data_dir + '/masks/cam%02d/%08d.jpg' % (view_idx, pose_idx), cv.IMREAD_UNCHANGED)
+        img_path = self.data_dir + '/images/cam%02d/%08d.jpg' % (view_idx, pose_idx)
+        if not os.path.exists(img_path):
+            img_path = self.data_dir + '/images/cam%02d/%08d.png' % (view_idx, pose_idx)
+
+        mask_path = self.data_dir + '/masks/cam%02d/%08d.jpg' % (view_idx, pose_idx)
+        if not os.path.exists(mask_path):
+            mask_path = self.data_dir + '/masks/cam%02d/%08d.png' % (view_idx, pose_idx)
+
+        color_img = cv.imread(img_path, cv.IMREAD_UNCHANGED)
+        mask_img = cv.imread(mask_path, cv.IMREAD_UNCHANGED)
+
+        # Handle multi-channel mask images
+        if mask_img is not None and len(mask_img.shape) == 3:
+            if mask_img.shape[2] == 2:
+                # Grayscale + alpha: use alpha channel
+                mask_img = mask_img[:, :, 1]
+            elif mask_img.shape[2] == 4:
+                # RGBA: use alpha channel
+                mask_img = mask_img[:, :, 3]
+            else:
+                # RGB: convert to grayscale
+                mask_img = cv.cvtColor(mask_img, cv.COLOR_BGR2GRAY)
+
         return color_img, mask_img
 
 
