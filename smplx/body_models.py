@@ -1188,6 +1188,11 @@ class SMPLX(SMPLH):
         body_pose = body_pose if body_pose is not None else self.body_pose
         betas = betas if betas is not None else self.betas
 
+        # Handle multiple betas by averaging over dim 0. Output should be (1, num_betas)
+        if betas.shape[0] > 1:
+            # print(f"Warning: Averaging over {betas.shape[0]} betas. Output shape will be (1, num_betas)")
+            betas = betas.mean(dim=0, keepdim=True)
+
         left_hand_pose = (left_hand_pose if left_hand_pose is not None else
                           self.left_hand_pose)
         right_hand_pose = (right_hand_pose if right_hand_pose is not None else

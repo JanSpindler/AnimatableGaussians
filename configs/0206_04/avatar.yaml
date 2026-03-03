@@ -17,8 +17,8 @@ train:
     epoch: 1
     batch: 50000
   eval_interval: 1000
-  eval_training_ids: [310, 19]
-  eval_testing_ids: [354, 1]
+  eval_training_ids: [150, 19]
+  eval_testing_ids: [150, 1]
   eval_img_factor: 1.0
   # lr_init: 0.0005
   lr:

@@ -447,7 +447,7 @@ class AvatarTrainer:
 
         img_factor = self.opt['train'].get('eval_img_factor', 1.0)
         # training data
-        pose_idx, view_idx = self.opt['train'].get('eval_training_ids', (310, 19))
+        pose_idx, view_idx = self.opt['train'].get('eval_training_ids', (150, 19))
         intr = self.dataset.intr_mats[view_idx].copy()
         intr[:2] *= img_factor
         item = self.dataset.getitem(0,
@@ -484,7 +484,7 @@ class AvatarTrainer:
             save_mesh_as_ply(output_dir + '/cano_pts/iter_%d.ply' % self.iter_idx, (self.avatar_net.init_points + gs_render['offset']).cpu().numpy())
 
         # training data
-        pose_idx, view_idx = self.opt['train'].get('eval_testing_ids', (310, 19))
+        pose_idx, view_idx = self.opt['train'].get('eval_testing_ids', (150, 19))
         intr = self.dataset.intr_mats[view_idx].copy()
         intr[:2] *= img_factor
         item = self.dataset.getitem(0,
