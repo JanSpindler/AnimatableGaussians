@@ -113,7 +113,7 @@ class MvRgbDatasetBase(Dataset):
         else:  # testing
             pose_idx = self.pose_list[index]
             data_idx = pose_idx
-            print('data index: %d' % pose_idx)
+            # print('data index: %d' % pose_idx)
 
         # SMPL
         with torch.no_grad():

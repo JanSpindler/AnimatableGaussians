@@ -51,7 +51,7 @@ test:
   render_skeleton: false
   save_tex_map: false
   save_ply: false
-  n_pca: 20
+  n_pca: 0 #20
   sigma_pca: 2.0
   prev_ckpt: ./results/subject00_julian/avatar/batch_500000
 model:
