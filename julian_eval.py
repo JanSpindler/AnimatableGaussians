@@ -190,19 +190,19 @@ tests = [
         "end_frame": 2000,
         "views": [23],
     },
-    # 0165_08
+    # 0206_04
     {
-        "subject_name": "0165_08",
-        "ckpt_path": "./results/0165_08/avatar/batch_500000/net.pt",
-        "data_path": "./dnarendering/0165_08",
+        "subject_name": "0206_04",
+        "ckpt_path": "./results/0206_04/avatar/batch_500000/net.pt",
+        "data_path": "./dnarendering/0206_04",
         "start_frame": 180,
         "end_frame": 225,
         "views": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59],
     },
     {
-        "subject_name": "0165_08",
-        "ckpt_path": "./results/0165_08/avatar/batch_500000/net.pt",
-        "data_path": "./dnarendering/0165_08",
+        "subject_name": "0206_04",
+        "ckpt_path": "./results/0206_04/avatar/batch_500000/net.pt",
+        "data_path": "./dnarendering/0206_04",
         "start_frame": 0,
         "end_frame": 180,
         "views": [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59],
@@ -285,6 +285,5 @@ if __name__ == '__main__':
         },
     }
 
-    # for test_run in tests:
-    #     test(test_run, True)
-    test(tests[1], visualize=False)
+    for test_run in tests:
+        test(test_run, False)
